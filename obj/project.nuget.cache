@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "xt2UK41nE8s=",
+  "success": true,
+  "projectFilePath": "/home/moises/Git/Crud/C#/LojaDeCarros/LojaDeCarros.csproj",
+  "expectedPackageFiles": [
+    "/home/moises/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.4/microsoft.aspnetcore.app.ref.9.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

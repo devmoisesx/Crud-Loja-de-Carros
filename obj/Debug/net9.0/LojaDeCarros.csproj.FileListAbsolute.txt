@@ -1,0 +1,14 @@
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/LojaDeCarros
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/LojaDeCarros.deps.json
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/LojaDeCarros.runtimeconfig.json
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/LojaDeCarros.dll
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/LojaDeCarros.pdb
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.GeneratedMSBuildEditorConfig.editorconfig
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.AssemblyInfoInputs.cache
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.AssemblyInfo.cs
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.csproj.CoreCompileInputs.cache
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.dll
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/refint/LojaDeCarros.dll
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.pdb
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/LojaDeCarros.genruntimeconfig.cache
+/home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/ref/LojaDeCarros.dll
