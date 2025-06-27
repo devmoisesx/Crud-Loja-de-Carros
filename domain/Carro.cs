@@ -14,20 +14,20 @@ public class Carro : IServiceCarro
 
     public enum MarcaCarro
     {
-        VW = 0,
-        GM = 1,
-        Ford = 2,
-        Toyota = 3,
-        Honda = 4
+        VW,
+        GM,
+        Ford,
+        Toyota,
+        Honda
     }
     
     public enum TipoTransmissao
     {
-        Manual = 0,
-        Automática = 1,
-        Automatizado = 2,
-        CVT = 3,
-        DSG = 4
+        Manual,
+        Automática,
+        Automatizado,
+        CVT,
+        DSG
     }
 
     // private const CarroOpcionais {
@@ -48,16 +48,16 @@ public class Carro : IServiceCarro
 
     public Carro(MarcaCarro marca, int id, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
     {
-        this.Marca = marca;
-        this.Id = id;
-        this.AnoFabricacao = anoFabricacao;
-        this.Modelo = modelo;
-        this.AnoModelo = anoModelo;
-        this.Km = km;
-        this.Transmissao = transmissao;
-        this.Valor = valor;
-        this.Cor = cor;
-        this.Chassis = chassis;
+        Marca = marca;
+        Id = id;
+        AnoFabricacao = anoFabricacao;
+        Modelo = modelo;
+        AnoModelo = anoModelo;
+        Km = km;
+        Transmissao = transmissao;
+        Valor = valor;
+        Cor = cor;
+        Chassis = chassis;
         TodosCarros.Add(this);
     }
 
@@ -66,14 +66,22 @@ public class Carro : IServiceCarro
         return 1;
     }
 
-    // public Carro ListarCarro(int id) {
-    //     Carro carro = Carro.id;
-    //     return Carro;
-    // }
+    public Carro ListarCarro(int id)
+    {
+        foreach (var carro in TodosCarros)
+        {
+            if (carro.Id == id)
+            {
+                return carro;
+            }
+        }
+        
+        return null;
+    }
 
     public List<Carro> ListarCarros()
     {
-        return TodosCarros;
+        return new List<Carro>(TodosCarros);
     }
 
     public override string ToString()
