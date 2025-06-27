@@ -1,17 +1,41 @@
-public class Compra
+public class Compra : IServiceCompra
 {
-    private int id;
-    private int carroID;
-    private int clienteID;
-    private float valor;
-    private DateTime data;
+    public int Id { get; set; }
+    public int CarroID { get; set; }
+    public int ClienteID { get; set; }
+    public float Valor { get; set; }
+    public DateTime Data { get; set; }
+    public static List<Compra> TodasCompras = new List<Compra>();
 
     public Compra(int id, int carroID, int clienteID, float valor, DateTime data)
     {
-        this.id = id;
-        this.carroID = carroID;
-        this.clienteID = clienteID;
-        this.valor = valor;
-        this.data = data;
+        Id = id;
+        CarroID = carroID;
+        ClienteID = clienteID;
+        Valor = valor;
+        Data = data;
+    }
+
+    public List<Compra> ListarCompras(int mes)
+    {
+        return TodasCompras;
+    }
+
+    public Compra ListarCompra(int id)
+    {
+        foreach (var compra in TodasCompras)
+        {
+            if (compra.Id == id)
+            {
+                return compra;
+            }
+        }
+        
+        return null;
+    }
+
+    public int InsereCompra(int clienteID, int carroID, DateTime data, float valor)
+    {
+        return 1;
     }
 }
