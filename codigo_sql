@@ -1,0 +1,55 @@
+CREATE TABLE Carros (
+    Id INTEGER PRIMARY KEY,
+    Marca TEXT NOT NULL,
+    Modelo TEXT NOT NULL,
+    AnoFabricacao INTEGER NOT NULL,
+    AnoModelo INTEGER NOT NULL,
+    Km INTEGER NOT NULL,
+    TipoTransmissao TEXT NOT NULL,
+    Valor REAL NOT NULL,
+    Cor TEXT NOT NULL,
+    Chassis TEXT NOT NULL
+);
+
+SELECT * FROM Carros;
+
+CREATE TABLE Clientes (
+    Id INTEGER PRIMARY KEY,
+    Nome TEXT NOT NULL,
+    Documento TEXT UNIQUE NOT NULL,
+    Logradouro TEXT,
+    CasaNumero TEXT,
+    Bairro TEXT,
+    Complemento TEXT,
+    Cidade TEXT,
+    Estado TEXT,
+    CEP INTEGER
+);
+
+SELECT * FROM Clientes;
+
+CREATE TABLE ClienteContato (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ClienteId INTEGER NOT NULL,
+    Tipo TEXT NOT NULL,
+    Valor TEXT NOT NULL,
+    FOREIGN KEY (ClienteId) REFERENCES Clientes(Id)
+);
+
+SELECT * FROM ClienteContato;
+
+CREATE TABLE Transacoes (
+    Id INTEGER PRIMARY KEY,
+    TipoTransacao INTEGER NOT NULL,
+    CarroId INTEGER NOT NULL,
+    ClienteId INTEGER NOT NULL,
+    Valor REAL NOT NULL,
+    Data DATETIME NOT NULL,
+    FOREIGN KEY (CarroId) REFERENCES Carros(Id),
+    FOREIGN KEY (ClienteId) REFERENCES Clientes(Id)
+);
+
+SELECT * FROM Transacoes;
+
+INSERT INTO Clientes 
+VALUES (01, 'Banana', '2735987235', 'Avenida', '97', 'Casa Verde', '', 'São Paulo', 'São Paulo', '035235-12' );
