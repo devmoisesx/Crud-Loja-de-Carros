@@ -1,10 +1,10 @@
 using Microsoft.Data.Sqlite;
 
-public class StorageCarroSqlite
+public class StorageTransacaoSqlite
 {
     private readonly string _connectionString;
 
-    public StorageCarroSqlite()
+    public StorageTransacaoSqlite()
     {
         _connectionString = "Data Source=lojaCarros.db;";
         InitializeDatabase();

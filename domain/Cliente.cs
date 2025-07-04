@@ -3,7 +3,7 @@ public class Cliente : IServiceCliente
     public int Id { get; set; }
     public string Nome { get; set; }
     public string Documento { get; set; }
-    public List<ClienteContato> Contato { get; set; }
+    // public List<ClienteContato> Contato { get; set; }
     public string Logradouro { get; set; }
     public string CasaNumero { get; set; }
     public string Bairro { get; set; }
@@ -15,12 +15,12 @@ public class Cliente : IServiceCliente
 
     public Cliente() { }
 
-    public Cliente(int id, string nome, string documento, List<ClienteContato> contato, string logradouro, string casaNumero, string bairro, string complemento, string cidade, string estado, int cep)
+    public Cliente(int id, string nome, string documento, string logradouro, string casaNumero, string bairro, string complemento, string cidade, string estado, int cep)
     {
         Id = id;
         Nome = nome;
         Documento = documento;
-        Contato = contato;
+        // Contato = contato;
         Logradouro = logradouro;
         CasaNumero = casaNumero;
         Bairro = bairro;
