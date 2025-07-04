@@ -1,7 +1,7 @@
 public class Carro : IServiceCarro
 {
+    // public int Id { get; set; }
     public MarcaCarro Marca { get; set; }
-    public int Id { get; set; }
     public int AnoFabricacao { get; set; }
     public string Modelo { get; set; }
     public int AnoModelo { get; set; }
@@ -28,28 +28,16 @@ public class Carro : IServiceCarro
         Automatizado,
         CVT,
         DSG
-    }
-
-    // private const CarroOpcionais {
-	// 	Blindado,
-	// 	Direção Hidraulíca,
-	// 	Teto Solar,
-	// 	Vidros Elétricos,
-	// 	Bancos em Couro,
-	// 	Cam Traseira,
-	// 	Ar Condicionado,
-	// 	Central Multimídia,
-	// 	Radio
-	// }
+    };
 
     public static List<Carro> TodosCarros = new List<Carro>();
 
     public Carro() { }
 
-    public Carro(MarcaCarro marca, int id, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
+    public Carro(MarcaCarro marca, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
     {
+        // Id = id;
         Marca = marca;
-        Id = id;
         AnoFabricacao = anoFabricacao;
         Modelo = modelo;
         AnoModelo = anoModelo;
@@ -68,13 +56,13 @@ public class Carro : IServiceCarro
 
     public Carro ListarCarro(int id)
     {
-        foreach (var carro in TodosCarros)
-        {
-            if (carro.Id == id)
-            {
-                return carro;
-            }
-        }
+        // foreach (var carro in TodosCarros)
+        // {
+        //     if (carro.Id == id)
+        //     {
+        //         return carro;
+        //     }
+        // }
         
         return null;
     }
