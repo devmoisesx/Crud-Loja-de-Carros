@@ -64,8 +64,28 @@ public class StorageClienteSqlite
 
         string sql = "SELECT * FROM Clientes;";
         using var command = new SqliteCommand(sql, connection);
+        
+        SqliteDataReader sqReader = command.ExecuteReader();
+        try {
+            // Always call Read before accessing data.
+            while (sqReader.Read())
+            {
+                // Console.WriteLine(sqReader.GetInt32(0).ToString() + " " + sqReader.GetString(1) + " " + sqReader.GetString(2));
+                Console.WriteLine(sqReader.);
 
-        System.Console.WriteLine(command.ExecuteReader());
+                // for (int i = 0; i < sqReader.; i++)
+                // {
+                //     System.Console.WriteLine(sqReader);
+                // }
+        }
+        }
+        finally {
+                // always call Close when done reading.
+                sqReader.Close();
+
+                // Close the connection when done with it.
+                connection.Close();
+        }
     }
 
 }
