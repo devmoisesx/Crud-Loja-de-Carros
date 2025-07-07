@@ -13,4 +13,11 @@ Cliente cliente2 = new(2, "Ana", "129849812", "Alfredo", "91", "Coxinha", "", "S
 // storageCliente.CadastrarCliente(cliente1);
 // storageCliente.CadastrarCliente(cliente2);
 
-storageCliente.ListarClientes();
+
+// System.Console.WriteLine(.ToString());
+
+foreach (var cliente in storageCliente.ListarClientes())
+{
+    System.Console.WriteLine(cliente);
+   System.Console.WriteLine();
+}

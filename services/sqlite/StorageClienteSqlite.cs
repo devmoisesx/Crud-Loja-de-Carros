@@ -57,35 +57,42 @@ public class StorageClienteSqlite
         command.ExecuteNonQuery();
     }
 
-    public void ListarClientes()
+    public List<Cliente> ListarClientes()
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
         string sql = "SELECT * FROM Clientes;";
         using var command = new SqliteCommand(sql, connection);
-        
-        SqliteDataReader sqReader = command.ExecuteReader();
-        try {
-            // Always call Read before accessing data.
-            while (sqReader.Read())
+
+        List<Cliente> ListaClientes = new List<Cliente>();
+        Cliente cliente = new Cliente();
+
+        using (SqliteDataReader reader = command.ExecuteReader())
+        {
+            while (reader.Read())
             {
-                // Console.WriteLine(sqReader.GetInt32(0).ToString() + " " + sqReader.GetString(1) + " " + sqReader.GetString(2));
-                Console.WriteLine(sqReader.);
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    cliente = new Cliente
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),    
+                        Nome = Convert.ToString(reader["Nome"]),    
+                        Documento = Convert.ToString(reader["Documento"]),    
+                        Logradouro = Convert.ToString(reader["Logradouro"]),    
+                        CasaNumero = Convert.ToString(reader["CasaNumero"]),    
+                        Bairro = Convert.ToString(reader["Bairro"]),    
+                        Complemento = Convert.ToString(reader["Complemento"]),    
+                        Cidade = Convert.ToString(reader["Cidade"]),    
+                        Estado = Convert.ToString(reader["Estado"]),    
+                        Cep = Convert.ToInt32(reader["CEP"]),    
+                    };
+                }
+                ListaClientes.Add(cliente);
+            }
+        }
 
-                // for (int i = 0; i < sqReader.; i++)
-                // {
-                //     System.Console.WriteLine(sqReader);
-                // }
-        }
-        }
-        finally {
-                // always call Close when done reading.
-                sqReader.Close();
-
-                // Close the connection when done with it.
-                connection.Close();
-        }
+        return ListaClientes;
     }
 
 }
