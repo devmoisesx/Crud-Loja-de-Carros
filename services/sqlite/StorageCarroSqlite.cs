@@ -17,7 +17,7 @@ public class StorageCarroSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Carros (
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Id INTEGER PRIMARY KEY,
                 Marca TEXT NOT NULL,
                 Modelo TEXT NOT NULL,
                 AnoFabricacao INTEGER NOT NULL,
@@ -39,10 +39,10 @@ public class StorageCarroSqlite
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
-        string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (NULL, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
+        string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (@Id, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
         using var command = new SqliteCommand(sql, connection);
 
-        // command.Parameters.AddWithValue("@Id", carro.Id);
+        command.Parameters.AddWithValue("@Id", carro.Id);
         command.Parameters.AddWithValue("@Marca", carro.Marca);
         command.Parameters.AddWithValue("@Modelo", carro.Modelo);
         command.Parameters.AddWithValue("@AnoFabricacao", carro.AnoFabricacao);
@@ -55,6 +55,44 @@ public class StorageCarroSqlite
         // command.Parameters.AddWithValue("@Id", carro.);
 
         command.ExecuteNonQuery();
+    }
+
+    public List<Carro> ListarCarros()
+    {
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        string sql = "SELECT * FROM Carros;";
+        using var command = new SqliteCommand(sql, connection);
+
+        List<Carro> ListaCarros = new List<Carro>();
+        Carro carro = new Carro();
+
+        using (SqliteDataReader reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    carro = new Carro
+                    {
+                        Id = reader.GetInt32(0),
+                        Marca = (Carro.MarcaCarro)reader.GetInt32(1),
+                        AnoFabricacao = reader.GetInt32(2),
+                        Modelo = reader.GetString(3),
+                        AnoModelo = reader.GetInt32(4),
+                        Km = reader.GetInt32(5),
+                        Transmissao = (Carro.TipoTransmissao)reader.GetInt32(6),
+                        Valor = reader.GetFloat(7),
+                        Cor = reader.GetString(8),
+                        Chassis = reader.GetString(9),
+                    };
+                }
+                ListaCarros.Add(carro);
+            }
+        }
+
+        return ListaCarros;
     }
 
 }
