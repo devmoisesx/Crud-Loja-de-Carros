@@ -1,6 +1,8 @@
+using System.Data.Common;
+
 public class Carro : IServiceCarro
 {
-    // public int Id { get; set; }
+    public int Id { get; set; }
     public MarcaCarro Marca { get; set; }
     public int AnoFabricacao { get; set; }
     public string Modelo { get; set; }
@@ -34,9 +36,9 @@ public class Carro : IServiceCarro
 
     public Carro() { }
 
-    public Carro(MarcaCarro marca, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
+    public Carro(int id, MarcaCarro marca, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
     {
-        // Id = id;
+        Id = id;
         Marca = marca;
         AnoFabricacao = anoFabricacao;
         Modelo = modelo;
@@ -74,6 +76,6 @@ public class Carro : IServiceCarro
 
     public override string ToString()
     {
-        return $"Carro: \nMarca: {Marca} \nAno de Fabricacao: {AnoFabricacao} \nModelo: {Modelo} \nAno do Modelo: {AnoModelo} \nKM: {Km} \nTipo de Transmissão: {Transmissao} \nValor: {Valor} \nCor: {Cor} \nChassis: {Chassis}";
+        return $"Carro: \nId: {Id} \nMarca: {Marca} \nAno de Fabricacao: {AnoFabricacao} \nModelo: {Modelo} \nAno do Modelo: {AnoModelo} \nKM: {Km} \nTipo de Transmissão: {Transmissao} \nValor: {Valor} \nCor: {Cor} \nChassis: {Chassis}";
     }
 }

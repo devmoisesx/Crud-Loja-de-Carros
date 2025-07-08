@@ -1,14 +1,24 @@
 ﻿var storageCarro = new StorageCarroSqlite();
 
-// Carro carro1 = new(1, (Carro.MarcaCarro)1, "Banana", 1990, 2025, 50000, (Carro.TipoTransmissao)1, 157.912F, "preto", "1SFD9821DA09");
+// Carro carro1 = new((Carro.MarcaCarro)1, "Banana", 1990, 2025, 50000, (Carro.TipoTransmissao)1, 157.912F, "preto", "1SFD9821DA09");
 
 // storageCarro.CadastrarCarro(carro1);
 
 foreach (var carro in storageCarro.ListarCarros())
 {
     System.Console.WriteLine(carro);
-    System.Console.WriteLine();
+   System.Console.WriteLine();
 }
+
+
+
+
+
+
+
+
+
+
 
 // var storageCliente = new StorageClienteSqlite();
 
@@ -25,7 +35,5 @@ foreach (var carro in storageCarro.ListarCarros())
 // foreach (var cliente in storageCliente.ListarClientes())
 // {
 //     System.Console.WriteLine(cliente);
-//     System.Console.WriteLine();
+//    System.Console.WriteLine();
 // }
-
-// System.Console.WriteLine(storageCliente.ListarCliente(1));

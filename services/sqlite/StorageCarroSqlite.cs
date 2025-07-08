@@ -17,7 +17,7 @@ public class StorageCarroSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Carros (
-                Id INTEGER PRIMARY KEY,
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Marca TEXT NOT NULL,
                 Modelo TEXT NOT NULL,
                 AnoFabricacao INTEGER NOT NULL,
@@ -39,10 +39,10 @@ public class StorageCarroSqlite
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
-        string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (@Id, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
+        string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (NULL, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
         using var command = new SqliteCommand(sql, connection);
 
-        command.Parameters.AddWithValue("@Id", carro.Id);
+        // command.Parameters.AddWithValue("@Id", carro.Id);
         command.Parameters.AddWithValue("@Marca", carro.Marca);
         command.Parameters.AddWithValue("@Modelo", carro.Modelo);
         command.Parameters.AddWithValue("@AnoFabricacao", carro.AnoFabricacao);
