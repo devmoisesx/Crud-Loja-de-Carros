@@ -95,4 +95,35 @@ public class StorageCarroSqlite
         return ListaCarros;
     }
 
+    public Carro ListarCarro(int Id)
+    {
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        string sql = "SELECT * FROM Carros WHERE Id = @Id";
+        using var command = new SqliteCommand(sql, connection);
+        command.Parameters.AddWithValue("@Id", Id);
+        Carro carro = new Carro();
+
+        using var reader = command.ExecuteReader();
+        if (reader.Read())
+        {
+            carro = new Carro
+            {
+                Id = reader.GetInt32(0),
+                Marca = (Carro.MarcaCarro)reader.GetInt32(1),
+                AnoFabricacao = reader.GetInt32(2),
+                Modelo = reader.GetString(3),
+                AnoModelo = reader.GetInt32(4),
+                Km = reader.GetInt32(5),
+                Transmissao = (Carro.TipoTransmissao)reader.GetInt32(6),
+                Valor = reader.GetFloat(7),
+                Cor = reader.GetString(8),
+                Chassis = reader.GetString(9),
+
+            };
+        }
+        return carro;
+    }
+
 }

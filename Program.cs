@@ -4,13 +4,13 @@
 
 // storageCarro.CadastrarCarro(carro1);
 
-foreach (var carro in storageCarro.ListarCarros())
-{
-    System.Console.WriteLine(carro);
-   System.Console.WriteLine();
-}
+// foreach (var carro in storageCarro.ListarCarros())
+// {
+//     System.Console.WriteLine(carro);
+//    System.Console.WriteLine();
+// }
 
-
+System.Console.WriteLine(storageCarro.ListarCarro(3));
 
 
 
