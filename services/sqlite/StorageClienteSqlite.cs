@@ -76,16 +76,16 @@ public class StorageClienteSqlite
                 {
                     cliente = new Cliente
                     {
-                        Id = Convert.ToInt32(reader["Id"]),    
-                        Nome = Convert.ToString(reader["Nome"]),    
-                        Documento = Convert.ToString(reader["Documento"]),    
-                        Logradouro = Convert.ToString(reader["Logradouro"]),    
-                        CasaNumero = Convert.ToString(reader["CasaNumero"]),    
-                        Bairro = Convert.ToString(reader["Bairro"]),    
-                        Complemento = Convert.ToString(reader["Complemento"]),    
-                        Cidade = Convert.ToString(reader["Cidade"]),    
-                        Estado = Convert.ToString(reader["Estado"]),    
-                        Cep = Convert.ToInt32(reader["CEP"]),    
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Nome = Convert.ToString(reader["Nome"]),
+                        Documento = Convert.ToString(reader["Documento"]),
+                        Logradouro = Convert.ToString(reader["Logradouro"]),
+                        CasaNumero = Convert.ToString(reader["CasaNumero"]),
+                        Bairro = Convert.ToString(reader["Bairro"]),
+                        Complemento = Convert.ToString(reader["Complemento"]),
+                        Cidade = Convert.ToString(reader["Cidade"]),
+                        Estado = Convert.ToString(reader["Estado"]),
+                        Cep = Convert.ToInt32(reader["CEP"]),
                     };
                 }
                 ListaClientes.Add(cliente);
@@ -93,6 +93,39 @@ public class StorageClienteSqlite
         }
 
         return ListaClientes;
+    }
+
+    public Cliente ListarCliente(int Id)
+    {
+        using var connection = new SqliteConnection(_connectionString);
+        connection.Open();
+
+        string sql = "SELECT * FROM Clientes WHERE Id = @Id";
+        using var command = new SqliteCommand(sql, connection);
+        command.Parameters.AddWithValue("@Id", Id);
+        Cliente cliente = new Cliente();
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                cliente = new Cliente
+                {
+                    Id = Convert.ToInt32(reader["Id"]),
+                    Nome = Convert.ToString(reader["Nome"]),
+                    Documento = Convert.ToString(reader["Documento"]),
+                    Logradouro = Convert.ToString(reader["Logradouro"]),
+                    CasaNumero = Convert.ToString(reader["CasaNumero"]),
+                    Bairro = Convert.ToString(reader["Bairro"]),
+                    Complemento = Convert.ToString(reader["Complemento"]),
+                    Cidade = Convert.ToString(reader["Cidade"]),
+                    Estado = Convert.ToString(reader["Estado"]),
+                    Cep = Convert.ToInt32(reader["CEP"]),
+                };
+            }
+        }
+        return cliente;
     }
 
 }
