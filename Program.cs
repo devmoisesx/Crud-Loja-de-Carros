@@ -14,23 +14,21 @@ foreach (var carro in servicoCarro.ListarCarros())
 
 // ----------------------------------------------------------------------- 
 
-// var storageCliente = new StorageClienteSqlite();
+ServiceCliente servicoCliente = new ServiceCliente();
 
 // Cliente cliente1 = new(1, "Túlio", "823765982", "Alfredo", "91", "Coxinha", "", "São Paulo", "São Paulo", 0241412);
 
 // Cliente cliente2 = new(2, "Ana", "129849812", "Alfredo", "91", "Coxinha", "", "São Paulo", "São Paulo", 0241312);
 
-// storageCliente.CadastrarCliente(cliente1);
-// storageCliente.CadastrarCliente(cliente2);
+// servicoCliente.CadastrarCliente(cliente1);
+// servicoCliente.CadastrarCliente(cliente2);
 
 
-// System.Console.WriteLine(.ToString());
-
-// foreach (var cliente in storageCliente.ListarClientes())
-// {
-//     System.Console.WriteLine(cliente);
-//    System.Console.WriteLine();
-// }
+foreach (var cliente in servicoCliente.ListarClientes())
+{
+    System.Console.WriteLine(cliente);
+    System.Console.WriteLine();
+}
 
 // ----------------------------------------------------------------------- 
 
