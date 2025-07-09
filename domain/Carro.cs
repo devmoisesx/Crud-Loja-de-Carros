@@ -1,6 +1,4 @@
-using System.Data.Common;
-
-public class Carro : IServiceCarro
+public class Carro
 {
     public int Id { get; set; }
     public MarcaCarro Marca { get; set; }
@@ -32,10 +30,6 @@ public class Carro : IServiceCarro
         DSG
     };
 
-    public static List<Carro> TodosCarros = new List<Carro>();
-
-    public Carro() { }
-
     public Carro(int id, MarcaCarro marca, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
     {
         Id = id;
@@ -48,30 +42,6 @@ public class Carro : IServiceCarro
         Valor = valor;
         Cor = cor;
         Chassis = chassis;
-        TodosCarros.Add(this);
-    }
-
-    public int CadastrarCarro(Carro carro)
-    {
-        return 1;
-    }
-
-    public Carro ListarCarro(int id)
-    {
-        // foreach (var carro in TodosCarros)
-        // {
-        //     if (carro.Id == id)
-        //     {
-        //         return carro;
-        //     }
-        // }
-        
-        return null;
-    }
-
-    public List<Carro> ListarCarros()
-    {
-        return new List<Carro>(TodosCarros);
     }
 
     public override string ToString()
