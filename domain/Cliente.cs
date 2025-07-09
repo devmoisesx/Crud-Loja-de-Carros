@@ -12,6 +12,7 @@ public class Cliente
     public string Estado { get; set; }
     public int Cep { get; set; }
 
+    public Cliente() { }
 
     public Cliente(int id, string nome, string documento, string logradouro, string casaNumero, string bairro, string complemento, string cidade, string estado, int cep)
     {

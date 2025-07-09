@@ -30,6 +30,8 @@ public class Carro
         DSG
     };
 
+    public Carro() { }
+
     public Carro(int id, MarcaCarro marca, string modelo, int anoFabricacao, int anoModelo, int km, TipoTransmissao transmissao, float valor, string cor, string chassis)
     {
         Id = id;
