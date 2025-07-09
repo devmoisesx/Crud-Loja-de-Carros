@@ -1,4 +1,4 @@
-public class Cliente : IServiceCliente
+public class Cliente
 {
     public int Id { get; set; }
     public string Nome { get; set; }
@@ -11,9 +11,7 @@ public class Cliente : IServiceCliente
     public string Cidade { get; set; }
     public string Estado { get; set; }
     public int Cep { get; set; }
-    public static List<Cliente> TodosClientes = new List<Cliente>();
 
-    public Cliente() { }
 
     public Cliente(int id, string nome, string documento, string logradouro, string casaNumero, string bairro, string complemento, string cidade, string estado, int cep)
     {
@@ -28,30 +26,6 @@ public class Cliente : IServiceCliente
         Cidade = cidade;
         Estado = estado;
         Cep = cep;
-        TodosClientes.Add(this);
-    }
-
-    public int CadastrarCliente(Cliente cliente)
-    {
-        return 1;
-    }
-
-    public List<Cliente> ListarClientes()
-    {
-        return TodosClientes.ToList();
-    }
-
-    public Cliente ListarCliente(int id)
-    {
-        foreach (var cliente in TodosClientes)
-        {
-            if (cliente.Id == id)
-            {
-                return cliente;
-            }
-        }
-        
-        return null;
     }
 
     public override string ToString()
