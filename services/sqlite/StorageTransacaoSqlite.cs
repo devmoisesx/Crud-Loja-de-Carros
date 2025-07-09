@@ -15,44 +15,44 @@ public class StorageTransacaoSqlite
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
+        using (var pragmaCommand = new SqliteCommand("PRAGMA foreign_keys = ON;"))
+        {
+            pragmaCommand.ExecuteNonQueryAsync();  
+        };
+        
         string createTableSql = @"
-            CREATE TABLE IF NOT EXISTS Carros (
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                Marca TEXT NOT NULL,
-                Modelo TEXT NOT NULL,
-                AnoFabricacao INTEGER NOT NULL,
-                AnoModelo INTEGER NOT NULL,
-                Km INTEGER NOT NULL,
-                TipoTransmissao TEXT NOT NULL,
-                Valor REAL NOT NULL,
-                Cor TEXT NOT NULL,
-                Chassis TEXT NOT NULL
+            CREATE TABLE IF NOT EXISTS Transacoes (
+                Id INTEGER PRIMARY KEY,
+                TipoTransacao TEXT NOT NULL,
+                Valor FLOAT NOT NULL,
+                Data TEXT NOT NULL,
+                CarroID INTEGER NOT NULL,
+                ClienteID INTEGER NOT NULL,
+                FOREIGN KEY (CarroID) REFERENCES Carros (Id),
+                FOREIGN KEY (ClienteID) REFERENCES Clientes (Id)
             );
         ";
 
-        using var command = new SqliteCommand(createTableSql, connection);
-        command.ExecuteNonQuery();
+        using (var command = new SqliteCommand(createTableSql, connection))
+        {
+            command.ExecuteNonQuery();
+        };
     }
 
-    public void CadastrarCarro(Carro carro)
+    public void InserirTransacao(Transacao transacao)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
-        string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (NULL, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
+        string sql = "INSERT INTO Transacoes (Id, TipoTransacao, Valor, Data, CarroID, ClienteID) VALUES (@Id, @TipoTransacao, @Valor, @Data, @CarroID, @ClienteID)";
         using var command = new SqliteCommand(sql, connection);
 
-        // command.Parameters.AddWithValue("@Id", carro.Id);
-        command.Parameters.AddWithValue("@Marca", carro.Marca);
-        command.Parameters.AddWithValue("@Modelo", carro.Modelo);
-        command.Parameters.AddWithValue("@AnoFabricacao", carro.AnoFabricacao);
-        command.Parameters.AddWithValue("@AnoModelo", carro.AnoModelo);
-        command.Parameters.AddWithValue("@Km", carro.Km);
-        command.Parameters.AddWithValue("@TipoTransmissao", carro.Transmissao);
-        command.Parameters.AddWithValue("@Valor", carro.Valor);
-        command.Parameters.AddWithValue("@Cor", carro.Cor);
-        command.Parameters.AddWithValue("@Chassis", carro.Chassis);
-        // command.Parameters.AddWithValue("@Id", carro.);
+        command.Parameters.AddWithValue("@Id", transacao.Id);
+        command.Parameters.AddWithValue("@TipoTransacao", transacao.Tipo);
+        command.Parameters.AddWithValue("@Valor", transacao.Valor);
+        command.Parameters.AddWithValue("@Data", transacao.Data);
+        command.Parameters.AddWithValue("@CarroID", transacao.CarroID);
+        command.Parameters.AddWithValue("@ClienteID", transacao.ClienteID);
 
         command.ExecuteNonQuery();
     }
