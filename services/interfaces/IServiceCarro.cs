@@ -1,6 +1,6 @@
 interface IServiceCarro
 {
-    int CadastrarCarro(Carro carro);
+    void CadastrarCarro(Carro carro);
     Carro ListarCarro(int id);
     List<Carro> ListarCarros();
 }
