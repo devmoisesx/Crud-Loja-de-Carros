@@ -1,4 +1,4 @@
-interface IServiceCliente
+public interface IServiceCliente
 {
     void CadastrarCliente(Cliente cliente);
     List<Cliente> ListarClientes();
