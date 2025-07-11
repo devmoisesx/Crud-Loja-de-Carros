@@ -2,6 +2,11 @@ public class ServiceTransacao : IServiceTransacao
 {
     private readonly StorageTransacaoSqlite _storage = new StorageTransacaoSqlite();
 
+    public ServiceTransacao(StorageTransacaoSqlite storage)
+    {
+        _storage = storage;
+    }
+
     public List<Transacao> ListarTransacoes(Transacao.TipoTransacao tipo, string mes)
     {
         return _storage.ListarTransacoes(tipo, mes);
