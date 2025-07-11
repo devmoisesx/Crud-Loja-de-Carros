@@ -17,7 +17,7 @@ public class StorageCarroSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Carros (
-                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Id INTEGER PRIMARY KEY,
                 Marca TEXT NOT NULL,
                 Modelo TEXT NOT NULL,
                 AnoFabricacao INTEGER NOT NULL,
@@ -103,7 +103,7 @@ public class StorageCarroSqlite
         string sql = "SELECT * FROM Carros WHERE Id = @Id";
         using var command = new SqliteCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", Id);
-        Carro carro = new Carro();
+        Carro carro = null;
 
         using var reader = command.ExecuteReader();
         if (reader.Read())
@@ -120,7 +120,6 @@ public class StorageCarroSqlite
                 Valor = reader.GetFloat(7),
                 Cor = reader.GetString(8),
                 Chassis = reader.GetString(9),
-
             };
         }
         return carro;

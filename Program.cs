@@ -1,20 +1,20 @@
-﻿ServiceCarro servicoCarro = new ServiceCarro();
+﻿// ServiceCarro servicoCarro = new ServiceCarro();
 
 // Carro carro1 = new(1, (Carro.MarcaCarro)1, "Banana", 1990, 2025, 50000, (Carro.TipoTransmissao)1, 157.912F, "preto", "1SFD9821DA09");
 
 // servicoCarro.CadastrarCarro(carro1);
 
-foreach (var carro in servicoCarro.ListarCarros())
-{
-    System.Console.WriteLine(carro);
-   System.Console.WriteLine();
-}
+// foreach (var carro in servicoCarro.ListarCarros())
+// {
+//     System.Console.WriteLine(carro);
+//    System.Console.WriteLine();
+// }
 
 // System.Console.WriteLine(storageCarro.ListarCarro(3));
 
 // ----------------------------------------------------------------------- 
 
-ServiceCliente servicoCliente = new ServiceCliente();
+// ServiceCliente servicoCliente = new ServiceCliente();
 
 // Cliente cliente1 = new(1, "Túlio", "823765982", "Alfredo", "91", "Coxinha", "", "São Paulo", "São Paulo", 0241412);
 
@@ -24,17 +24,26 @@ ServiceCliente servicoCliente = new ServiceCliente();
 // servicoCliente.CadastrarCliente(cliente2);
 
 
-foreach (var cliente in servicoCliente.ListarClientes())
-{
-    System.Console.WriteLine(cliente);
-    System.Console.WriteLine();
-}
+// foreach (var cliente in servicoCliente.ListarClientes())
+// {
+//     System.Console.WriteLine(cliente);
+//     System.Console.WriteLine();
+// }
 
 // ----------------------------------------------------------------------- 
 
-// StorageTransacaoSqlite storageTransacao = new StorageTransacaoSqlite();
+ServiceTransacao serviceTransacao = new ServiceTransacao();
 
-// // Transacao transacao1 = new Transacao(1, (Transacao.TipoTransacao)1, 1, 1, 25.000f, "08-07-2025");
-// Transacao transacao2 = new Transacao(2, (Transacao.TipoTransacao)0, 4, 2, 25.000f, "08-07-2025");
+// Transacao transacao1 = new Transacao(6, (Transacao.TipoTransacao)1, 25.000f, "07-2025", 2, 1);
 
-// storageTransacao.InserirTransacao(transacao2);
+// serviceTransacao.InserirTransacao(transacao1);
+
+// string MesTransacao = "07-2025";
+
+// foreach (var transacao in serviceTransacao.ListarTransacoes((Transacao.TipoTransacao)1, MesTransacao))
+// {
+//     System.Console.WriteLine(transacao);
+//     System.Console.WriteLine();
+// }
+
+System.Console.WriteLine(serviceTransacao.ListarTransacao(5));
