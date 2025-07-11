@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 public class TransacoesController : ControllerBase
 {
-    private readonly ServiceTransacao _serviceTransacao;
+    private readonly IServiceTransacao _serviceTransacao;
 
-    public TransacoesController(ServiceTransacao serviceTransacao)
+    public TransacoesController(IServiceTransacao serviceTransacao)
     {
         _serviceTransacao = serviceTransacao;
     }
