@@ -72,22 +72,20 @@ public class StorageClienteSqlite
         {
             while (reader.Read())
             {
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    cliente = new Cliente
-                    {
-                        Id = Convert.ToInt32(reader["Id"]),
-                        Nome = Convert.ToString(reader["Nome"]),
-                        Documento = Convert.ToString(reader["Documento"]),
-                        Logradouro = Convert.ToString(reader["Logradouro"]),
-                        CasaNumero = Convert.ToString(reader["CasaNumero"]),
-                        Bairro = Convert.ToString(reader["Bairro"]),
-                        Complemento = Convert.ToString(reader["Complemento"]),
-                        Cidade = Convert.ToString(reader["Cidade"]),
-                        Estado = Convert.ToString(reader["Estado"]),
-                        Cep = Convert.ToInt32(reader["CEP"]),
-                    };
-                }
+                cliente = new Cliente
+                (
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetString(3),
+                    reader.GetString(4),
+                    reader.GetString(5),
+                    reader.GetString(6),
+                    reader.GetString(7),
+                    reader.GetString(8),
+                    reader.GetInt32(9)
+                );
+                
                 ListaClientes.Add(cliente);
             }
         }
@@ -108,22 +106,19 @@ public class StorageClienteSqlite
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                cliente = new Cliente
-                {
-                    Id = Convert.ToInt32(reader["Id"]),
-                    Nome = Convert.ToString(reader["Nome"]),
-                    Documento = Convert.ToString(reader["Documento"]),
-                    Logradouro = Convert.ToString(reader["Logradouro"]),
-                    CasaNumero = Convert.ToString(reader["CasaNumero"]),
-                    Bairro = Convert.ToString(reader["Bairro"]),
-                    Complemento = Convert.ToString(reader["Complemento"]),
-                    Cidade = Convert.ToString(reader["Cidade"]),
-                    Estado = Convert.ToString(reader["Estado"]),
-                    Cep = Convert.ToInt32(reader["CEP"]),
-                };
-            }
+            cliente = new Cliente
+            (
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetString(3),
+                reader.GetString(4),
+                reader.GetString(5),
+                reader.GetString(6),
+                reader.GetString(7),
+                reader.GetString(8),
+                reader.GetInt32(9)
+            );
         }
         return cliente;
     }
