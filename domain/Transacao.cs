@@ -1,11 +1,11 @@
 public class Transacao
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public TipoTransacao Tipo { get; set; }
     public float Valor { get; set; }
-    public string Mes { get; set; }
-    public int CarroID { get; set; }
-    public int ClienteID { get; set; }
+    public string? Mes { get; set; }
+    public string? CarroID { get; set; }
+    public string? ClienteID { get; set; }
 
     public enum TipoTransacao
     {
@@ -13,7 +13,22 @@ public class Transacao
         Venda
     }
 
-    public Transacao(int id, TipoTransacao tipo, float valor, string mes, int carroID, int clienteID)
+    public Transacao()
+    {
+        Id = Ulid.NewUlid().ToString();
+    }
+
+    public Transacao(TipoTransacao tipo, float valor, string mes, string carroID, string clienteID)
+    {
+        Id = Ulid.NewUlid().ToString();
+        Tipo = tipo;
+        Valor = valor;
+        Mes = mes;
+        CarroID = carroID;
+        ClienteID = clienteID;
+    }
+
+    public Transacao(string id, TipoTransacao tipo, float valor, string mes, string carroID, string clienteID)
     {
         Id = id;
         Tipo = tipo;

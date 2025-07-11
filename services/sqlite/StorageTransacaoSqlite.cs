@@ -23,7 +23,7 @@ public class StorageTransacaoSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Transacoes (
-                Id INTEGER PRIMARY KEY,
+                Id TEXT PRIMARY KEY NOT NULL UNIQUE,
                 TipoTransacao TEXT NOT NULL,
                 Valor FLOAT NOT NULL,
                 Mes TEXT NOT NULL,
@@ -49,7 +49,7 @@ public class StorageTransacaoSqlite
         string sql = "INSERT INTO Transacoes (Id, TipoTransacao, Valor, Mes, CarroID, ClienteID) VALUES (@Id, @TipoTransacao, @Valor, @Mes, @CarroID, @ClienteID)";
         using var command = new SqliteCommand(sql, connection);
 
-        command.Parameters.AddWithValue("@Id", transacao.Id);
+        command.Parameters.AddWithValue("@Id", transacao.Id.ToString());
         command.Parameters.AddWithValue("@TipoTransacao", transacao.Tipo.ToString());
         command.Parameters.AddWithValue("@Valor", transacao.Valor);
         command.Parameters.AddWithValue("@Mes", transacao.Mes);
@@ -88,19 +88,19 @@ public class StorageTransacaoSqlite
 
             transacao = new Transacao
             (
-                reader.GetInt32(0),
+                reader.GetString(0),
                 (Transacao.TipoTransacao)TipoTransacaoValue,
                 reader.GetFloat(2),
                 reader.GetString(3),
-                reader.GetInt32(4),
-                reader.GetInt32(5)
+                reader.GetString(4),
+                reader.GetString(5)
             );
             ListaTransacoes.Add(transacao);
         }
         return ListaTransacoes;
     }
     
-    public Transacao ListarTransacao(int id)
+    public Transacao ListarTransacao(string id)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -124,12 +124,12 @@ public class StorageTransacaoSqlite
 
             return new Transacao
             (
-                reader.GetInt32(0),
+                reader.GetString(0),
                 (Transacao.TipoTransacao)TipoTransacaoValue,
                 reader.GetFloat(2),
                 reader.GetString(3),
-                reader.GetInt32(4),
-                reader.GetInt32(5)
+                reader.GetString(4),
+                reader.GetString(5)
             );
         }
         throw new KeyNotFoundException($"Transacao com ID {id} não encontrada.");

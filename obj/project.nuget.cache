@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XRO3kwcgMto=",
+  "dgSpecHash": "QMGmrB2xSvg=",
   "success": true,
   "projectFilePath": "/home/moises/Git/Crud/C#/LojaDeCarros/LojaDeCarros.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "/home/moises/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.10/sqlitepclraw.lib.e_sqlite3.2.1.10.nupkg.sha512",
     "/home/moises/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.10/sqlitepclraw.provider.e_sqlite3.2.1.10.nupkg.sha512",
     "/home/moises/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/home/moises/.nuget/packages/ulid/1.3.4/ulid.1.3.4.nupkg.sha512",
     "/home/moises/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.5/microsoft.aspnetcore.app.ref.9.0.5.nupkg.sha512"
   ],
   "logs": []

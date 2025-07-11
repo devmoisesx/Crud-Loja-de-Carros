@@ -28,7 +28,7 @@ public class ClientesController : ControllerBase
 
     // Get api/cliente?id=ID
     [HttpGet("{id}")]
-    public ActionResult<Cliente> GetCliente(int id)
+    public ActionResult<Cliente> GetCliente(string id)
     {
         try
         {

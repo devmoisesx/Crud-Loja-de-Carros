@@ -66,3 +66,4 @@
 /home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.LojaDeCarros.props
 /home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.LojaDeCarros.props
 /home/moises/Git/Crud/C#/LojaDeCarros/obj/Debug/net9.0/staticwebassets.pack.json
+/home/moises/Git/Crud/C#/LojaDeCarros/bin/Debug/net9.0/Ulid.dll

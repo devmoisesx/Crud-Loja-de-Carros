@@ -27,7 +27,7 @@ public class CarrosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Carro> GetCarro(int id)
+    public ActionResult<Carro> GetCarro(string id)
     {
         try
         {

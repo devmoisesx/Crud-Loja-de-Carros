@@ -12,7 +12,7 @@ public class ServiceTransacao : IServiceTransacao
         return _storage.ListarTransacoes(tipo, mes);
     }
 
-    public Transacao ListarTransacao(int id)
+    public Transacao ListarTransacao(string id)
     {
         return _storage.ListarTransacao(id);
     }

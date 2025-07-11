@@ -12,7 +12,7 @@ public class ServiceCarro : IServiceCarro
         _storage.CadastrarCarro(carro);
     }
 
-    public Carro ListarCarro(int id)
+    public Carro ListarCarro(string id)
     {
         return _storage.ListarCarro(id);
     }

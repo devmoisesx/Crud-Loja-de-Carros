@@ -32,7 +32,7 @@ public class TransacoesController : ControllerBase
 
     // Get api/transacao?id=ID
     [HttpGet("{id}")]
-    public ActionResult<Transacao> GetTransacao(int id)
+    public ActionResult<Transacao> GetTransacao(string id)
     {
         try
         {

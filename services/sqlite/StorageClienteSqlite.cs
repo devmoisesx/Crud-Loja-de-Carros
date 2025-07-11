@@ -17,16 +17,16 @@ public class StorageClienteSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Clientes (
-                Id INTEGER PRIMARY KEY,
+                Id TEXT PRIMARY KEY NOT NULL UNIQUE,
                 Nome TEXT NOT NULL,
-                Documento TEXT UNIQUE NOT NULL,
+                Documento TEXT UNIQUE NOT NULL UNIQUE,
                 Logradouro TEXT,
-                CasaNumero TEXT,
-                Bairro TEXT,
+                CasaNumero TEXT NOT NULL,
+                Bairro TEXT NOT NULL,
                 Complemento TEXT,
-                Cidade TEXT,
-                Estado TEXT,
-                CEP INTEGER
+                Cidade TEXT NOT NULL,
+                Estado TEXT NOT NULL,
+                CEP INTEGER NOT NULL
             );
         ";
 
@@ -42,7 +42,7 @@ public class StorageClienteSqlite
         string sql = "INSERT INTO clientes (Id, Nome, Documento, Logradouro, CasaNumero, Bairro, Complemento, Cidade, Estado, Cep) VALUES (@Id, @Nome, @Documento, @Logradouro, @CasaNumero, @Bairro, @Complemento, @Cidade, @Estado, @Cep)";
         using var command = new SqliteCommand(sql, connection);
 
-        command.Parameters.AddWithValue("@Id", cliente.Id);
+        command.Parameters.AddWithValue("@Id", Ulid.NewUlid().ToString());
         command.Parameters.AddWithValue("@Nome", cliente.Nome);
         command.Parameters.AddWithValue("@Documento", cliente.Documento);
         command.Parameters.AddWithValue("@Logradouro", cliente.Logradouro);
@@ -74,7 +74,7 @@ public class StorageClienteSqlite
             {
                 cliente = new Cliente
                 (
-                    reader.GetInt32(0),
+                    reader.GetString(0),
                     reader.GetString(1),
                     reader.GetString(2),
                     reader.GetString(3),
@@ -93,7 +93,7 @@ public class StorageClienteSqlite
         return ListaClientes;
     }
 
-    public Cliente ListarCliente(int Id)
+    public Cliente ListarCliente(string Id)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -107,7 +107,7 @@ public class StorageClienteSqlite
         {
             return new Cliente
             (
-                reader.GetInt32(0),
+                reader.GetString(0),
                 reader.GetString(1),
                 reader.GetString(2),
                 reader.GetString(3),

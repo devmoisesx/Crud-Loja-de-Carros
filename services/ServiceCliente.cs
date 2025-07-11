@@ -12,7 +12,7 @@ public class ServiceCliente : IServiceCliente
         _storage.CadastrarCliente(cliente);
     }
 
-    public Cliente ListarCliente(int id)
+    public Cliente ListarCliente(string id)
     {
         return _storage.ListarCliente(id);
     }

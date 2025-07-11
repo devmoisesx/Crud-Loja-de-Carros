@@ -17,7 +17,7 @@ public class StorageCarroSqlite
 
         string createTableSql = @"
             CREATE TABLE IF NOT EXISTS Carros (
-                Id INTEGER PRIMARY KEY,
+                Id TEXT PRIMARY KEY NOT NULL UNIQUE,
                 Marca TEXT NOT NULL,
                 Modelo TEXT NOT NULL,
                 AnoFabricacao INTEGER NOT NULL,
@@ -26,7 +26,7 @@ public class StorageCarroSqlite
                 TipoTransmissao TEXT NOT NULL,
                 Valor REAL NOT NULL,
                 Cor TEXT NOT NULL,
-                Chassis TEXT NOT NULL
+                Chassis TEXT NOT NULL UNIQUE
             );
         ";
 
@@ -42,7 +42,7 @@ public class StorageCarroSqlite
         string sql = "INSERT INTO Carros (Id, Marca, Modelo, AnoFabricacao, AnoModelo, Km, TipoTransmissao, Valor, Cor, Chassis) VALUES (@Id, @Marca, @Modelo, @AnoFabricacao, @AnoModelo, @Km, @TipoTransmissao, @Valor, @Cor, @Chassis)";
         using var command = new SqliteCommand(sql, connection);
 
-        command.Parameters.AddWithValue("@Id", carro.Id);
+        command.Parameters.AddWithValue("@Id", Ulid.NewUlid().ToString());
         command.Parameters.AddWithValue("@Marca", carro.Marca);
         command.Parameters.AddWithValue("@Modelo", carro.Modelo);
         command.Parameters.AddWithValue("@AnoFabricacao", carro.AnoFabricacao);
@@ -73,7 +73,7 @@ public class StorageCarroSqlite
             {
                 carro = new Carro
                 (
-                    reader.GetInt32(0),
+                    reader.GetString(0),
                     (Carro.MarcaCarro)reader.GetInt32(1),
                     reader.GetString(2),
                     reader.GetInt32(3),
@@ -91,7 +91,7 @@ public class StorageCarroSqlite
         return ListaCarros;
     }
 
-    public Carro ListarCarro(int Id)
+    public Carro ListarCarro(string Id)
     {
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
@@ -105,7 +105,7 @@ public class StorageCarroSqlite
         {
             return new Carro
             (
-                reader.GetInt32(0),
+                reader.GetString(0),
                 (Carro.MarcaCarro)reader.GetInt32(1),
                 reader.GetString(2),
                 reader.GetInt32(3),
