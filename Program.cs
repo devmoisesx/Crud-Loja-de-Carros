@@ -21,7 +21,23 @@ builder.Services.AddOpenApi(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddSingleton<StorageCarroSqlite>();
+builder.Services.AddSingleton<StorageClienteSqlite>();
+builder.Services.AddSingleton<StorageTransacaoSqlite>();
+
+builder.Services.AddScoped<IServiceCarro, ServiceCarro>();
+builder.Services.AddScoped<ServiceCarro>();
+builder.Services.AddScoped<IServiceCliente, ServiceCliente>();
+builder.Services.AddScoped<ServiceCliente>();
+builder.Services.AddScoped<IServiceTransacao, ServiceTransacao>();
+builder.Services.AddScoped<ServiceTransacao>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var storage = scope.ServiceProvider.GetRequiredService<StorageCarroSqlite>();
+}
 
 if (app.Environment.IsDevelopment())
 {
