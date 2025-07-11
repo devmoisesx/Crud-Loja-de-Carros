@@ -1,6 +1,11 @@
 public class ServiceCliente : IServiceCliente
 {
-    private readonly StorageClienteSqlite _storage = new StorageClienteSqlite();
+    private readonly StorageClienteSqlite _storage;
+
+    public ServiceCliente(StorageClienteSqlite storage)
+    {
+        _storage = storage;
+    }
 
     public void CadastrarCliente(Cliente cliente)
     {
