@@ -66,7 +66,7 @@ public class StorageCarroSqlite
         using var command = new SqliteCommand(sql, connection);
 
         List<Carro> ListaCarros = new List<Carro>();
-        Carro carro = new Carro();
+        Carro carro;
 
         using (SqliteDataReader reader = command.ExecuteReader())
         {
@@ -100,12 +100,11 @@ public class StorageCarroSqlite
         string sql = "SELECT * FROM Carros WHERE Id = @Id";
         using var command = new SqliteCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", Id);
-        Carro carro = new Carro();
 
         using var reader = command.ExecuteReader();
-        while (reader.Read())
+        if (reader.Read())
         {
-            carro = new Carro
+            return new Carro
             (
                 reader.GetInt32(0),
                 (Carro.MarcaCarro)reader.GetInt32(1),
@@ -119,7 +118,7 @@ public class StorageCarroSqlite
                 reader.GetString(9)
             );
         }
-        return carro;
+        throw new KeyNotFoundException($"Carro com ID {Id} não encontrado");
     }
 
 }
