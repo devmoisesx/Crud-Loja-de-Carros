@@ -66,7 +66,7 @@ public class StorageClienteSqlite
         using var command = new SqliteCommand(sql, connection);
 
         List<Cliente> ListaClientes = new List<Cliente>();
-        Cliente cliente = new Cliente();
+        Cliente cliente;
 
         using (SqliteDataReader reader = command.ExecuteReader())
         {
@@ -101,12 +101,11 @@ public class StorageClienteSqlite
         string sql = "SELECT * FROM Clientes WHERE Id = @Id;";
         using var command = new SqliteCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", Id);
-        Cliente cliente = new Cliente();
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
         {
-            cliente = new Cliente
+            return new Cliente
             (
                 reader.GetInt32(0),
                 reader.GetString(1),
@@ -120,7 +119,7 @@ public class StorageClienteSqlite
                 reader.GetInt32(9)
             );
         }
-        return cliente;
+        throw new KeyNotFoundException($"Cliente com ID {Id} não encontrado.");
     }
 
 }
