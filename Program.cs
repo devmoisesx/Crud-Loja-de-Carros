@@ -1,49 +1,33 @@
-﻿// ServiceCarro servicoCarro = new ServiceCarro();
+﻿using System.Reflection.Metadata;
+using Microsoft.OpenApi.Models;
 
-// Carro carro1 = new(1, (Carro.MarcaCarro)1, "Banana", 1990, 2025, 50000, (Carro.TipoTransmissao)1, 157.912F, "preto", "1SFD9821DA09");
+var builder = WebApplication.CreateBuilder(args);
 
-// servicoCarro.CadastrarCarro(carro1);
+builder.Services.AddOpenApi(options =>
+{
+    options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0;
 
-// foreach (var carro in servicoCarro.ListarCarros())
-// {
-//     System.Console.WriteLine(carro);
-//    System.Console.WriteLine();
-// }
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Info = new()
+        {
+            Title = "Loja de Carros API",
+            Version = "V1",
+            Description = "API para gerenciamento de loja de carros."
+        };
+        return Task.CompletedTask;
+    });
+});
 
-// System.Console.WriteLine(storageCarro.ListarCarro(3));
+builder.Services.AddControllers();
 
-// ----------------------------------------------------------------------- 
+var app = builder.Build();
 
-// ServiceCliente servicoCliente = new ServiceCliente();
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi("/openapi/v1/openapi.json");
+}
 
-// Cliente cliente1 = new(1, "Túlio", "823765982", "Alfredo", "91", "Coxinha", "", "São Paulo", "São Paulo", 0241412);
-
-// Cliente cliente2 = new(2, "Ana", "129849812", "Alfredo", "91", "Coxinha", "", "São Paulo", "São Paulo", 0241312);
-
-// servicoCliente.CadastrarCliente(cliente1);
-// servicoCliente.CadastrarCliente(cliente2);
-
-
-// foreach (var cliente in servicoCliente.ListarClientes())
-// {
-//     System.Console.WriteLine(cliente);
-//     System.Console.WriteLine();
-// }
-
-// ----------------------------------------------------------------------- 
-
-ServiceTransacao serviceTransacao = new ServiceTransacao();
-
-// Transacao transacao1 = new Transacao(6, (Transacao.TipoTransacao)1, 25.000f, "07-2025", 2, 1);
-
-// serviceTransacao.InserirTransacao(transacao1);
-
-// string MesTransacao = "07-2025";
-
-// foreach (var transacao in serviceTransacao.ListarTransacoes((Transacao.TipoTransacao)1, MesTransacao))
-// {
-//     System.Console.WriteLine(transacao);
-//     System.Console.WriteLine();
-// }
-
-System.Console.WriteLine(serviceTransacao.ListarTransacao(5));
+app.UseHttpsRedirection();
+app.MapControllers();
+app.Run();
