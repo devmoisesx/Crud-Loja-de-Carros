@@ -1,50 +1,32 @@
-public class Transacao : IServiceTransacoes
+public class Transacao
 {
     public int Id { get; set; }
     public TipoTransacao Tipo { get; set; }
+    public float Valor { get; set; }
+    public string Mes { get; set; }
     public int CarroID { get; set; }
     public int ClienteID { get; set; }
-    public float Valor { get; set; }
-    public DateTime Data { get; set; }
-
-    public static List<Transacao> TodasTransacoes = new List<Transacao>();
 
     public enum TipoTransacao
     {
-        Compra = 0,
-        Venda = 1
+        Compra,
+        Venda
     }
 
-    public Transacao(int id, TipoTransacao tipo, int carroID, int clienteID, float valor, DateTime data)
+    public Transacao() { }
+
+    public Transacao(int id, TipoTransacao tipo, float valor, string mes, int carroID, int clienteID)
     {
         Id = id;
         Tipo = tipo;
+        Valor = valor;
+        Mes = mes;
         CarroID = carroID;
         ClienteID = clienteID;
-        Valor = valor;
-        Data = data;
     }
 
-    public List<Transacao> ListarTransacoes(TipoTransacao tipo, int mes)
+    public override string ToString()
     {
-        return TodasTransacoes;
-    }
-
-    public Transacao ListarTransacao(int id)
-    {
-        foreach (var transacao in TodasTransacoes)
-        {
-            if (transacao.Id == id)
-            {
-                return transacao;
-            }
-        }
-        
-        return null;
-    }
-
-    public int InsereTransacao(TipoTransacao tipo, int clienteID, int carroID, DateTime data, float valor)
-    {
-        return 1;
+        return $"Transacao: \nId: {Id} \nTipo: {Tipo} \nValor: {Valor} \nMes: {Mes} \nCarro ID: {CarroID} \nCliente ID: {ClienteID}";
     }
 }
