@@ -1,4 +1,5 @@
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class StorageTransacaoSqlite
 {
@@ -70,7 +71,7 @@ public class StorageTransacaoSqlite
         command.Parameters.AddWithValue("@Mes", mes);
 
         List<Transacao> ListaTransacoes = new List<Transacao>();
-        Transacao transacao = new Transacao();
+        Transacao transacao;
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
@@ -106,10 +107,7 @@ public class StorageTransacaoSqlite
 
         string sql = "SELECT * FROM Transacoes WHERE Id = @Id;";
         using var command = new SqliteCommand(sql, connection);
-
         command.Parameters.AddWithValue("@Id", id);
-
-        Transacao transacao = new Transacao();
 
         using var reader = command.ExecuteReader();
         while (reader.Read())
@@ -124,7 +122,7 @@ public class StorageTransacaoSqlite
                 TipoTransacaoValue = 0;
             }
 
-            transacao = new Transacao
+            return new Transacao
             (
                 reader.GetInt32(0),
                 (Transacao.TipoTransacao)TipoTransacaoValue,
@@ -134,7 +132,7 @@ public class StorageTransacaoSqlite
                 reader.GetInt32(5)
             );
         }
-        return transacao;
+        throw new KeyNotFoundException($"Transacao com ID {id} não encontrada.");
     }
 
 }
