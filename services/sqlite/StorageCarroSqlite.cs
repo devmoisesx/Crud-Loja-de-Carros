@@ -72,22 +72,19 @@ public class StorageCarroSqlite
         {
             while (reader.Read())
             {
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    carro = new Carro
-                    {
-                        Id = reader.GetInt32(0),
-                        Marca = (Carro.MarcaCarro)reader.GetInt32(1),
-                        AnoFabricacao = reader.GetInt32(2),
-                        Modelo = reader.GetString(3),
-                        AnoModelo = reader.GetInt32(4),
-                        Km = reader.GetInt32(5),
-                        Transmissao = (Carro.TipoTransmissao)reader.GetInt32(6),
-                        Valor = reader.GetFloat(7),
-                        Cor = reader.GetString(8),
-                        Chassis = reader.GetString(9),
-                    };
-                }
+                carro = new Carro
+                (
+                    reader.GetInt32(0),
+                    (Carro.MarcaCarro)reader.GetInt32(1),
+                    reader.GetString(2),
+                    reader.GetInt32(3),
+                    reader.GetInt32(4),
+                    reader.GetInt32(5),
+                    (Carro.TipoTransmissao)reader.GetInt32(6),
+                    reader.GetFloat(7),
+                    reader.GetString(8),
+                    reader.GetString(9)
+                );
                 ListaCarros.Add(carro);
             }
         }
@@ -103,24 +100,24 @@ public class StorageCarroSqlite
         string sql = "SELECT * FROM Carros WHERE Id = @Id";
         using var command = new SqliteCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", Id);
-        Carro carro = null;
+        Carro carro = new Carro();
 
         using var reader = command.ExecuteReader();
-        if (reader.Read())
+        while (reader.Read())
         {
             carro = new Carro
-            {
-                Id = reader.GetInt32(0),
-                Marca = (Carro.MarcaCarro)reader.GetInt32(1),
-                AnoFabricacao = reader.GetInt32(2),
-                Modelo = reader.GetString(3),
-                AnoModelo = reader.GetInt32(4),
-                Km = reader.GetInt32(5),
-                Transmissao = (Carro.TipoTransmissao)reader.GetInt32(6),
-                Valor = reader.GetFloat(7),
-                Cor = reader.GetString(8),
-                Chassis = reader.GetString(9),
-            };
+            (
+                reader.GetInt32(0),
+                (Carro.MarcaCarro)reader.GetInt32(1),
+                reader.GetString(2),
+                reader.GetInt32(3),
+                reader.GetInt32(4),
+                reader.GetInt32(5),
+                (Carro.TipoTransmissao)reader.GetInt32(6),
+                reader.GetFloat(7),
+                reader.GetString(8),
+                reader.GetString(9)
+            );
         }
         return carro;
     }
