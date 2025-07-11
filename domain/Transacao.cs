@@ -13,8 +13,6 @@ public class Transacao
         Venda
     }
 
-    public Transacao() { }
-
     public Transacao(int id, TipoTransacao tipo, float valor, string mes, int carroID, int clienteID)
     {
         Id = id;
