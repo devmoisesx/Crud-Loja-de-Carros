@@ -17,7 +17,7 @@ public class CarrosController : ControllerBase
     {
         try
         {
-            var carros = _serviceCarro.ListarCarros();
+            List<Carro> carros = _serviceCarro.ListarCarros();
             return Ok(carros);
         }
         catch (System.Exception e)
@@ -57,6 +57,4 @@ public class CarrosController : ControllerBase
             return BadRequest($"Erro ao cadastrar carro: {e.Message}");
         }
     }
-
-    
 }
