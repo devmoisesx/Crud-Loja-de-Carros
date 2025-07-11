@@ -100,7 +100,7 @@ public class StorageClienteSqlite
         using var connection = new SqliteConnection(_connectionString);
         connection.Open();
 
-        string sql = "SELECT * FROM Clientes WHERE Id = @Id";
+        string sql = "SELECT * FROM Clientes WHERE Id = @Id;";
         using var command = new SqliteCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", Id);
         Cliente cliente = new Cliente();
