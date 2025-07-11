@@ -77,7 +77,7 @@ public class StorageTransacaoSqlite
         while (reader.Read())
         {
             int TipoTransacaoValue;
-            if (reader.GetString(1) == "Venda")
+            if (reader.GetString(1).Equals("Venda"))
             {
                 TipoTransacaoValue = 1;
             }
